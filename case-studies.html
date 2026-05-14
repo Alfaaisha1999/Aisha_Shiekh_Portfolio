@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies — Ayesha Sheikh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #3D7A6E; --green-dark: #2B5A51; --green-light: #EAF4F2;
+    --green-mid: #5A9E90; --off-white: #F7FAF9;
+    --text: #1A2E2B; --text-light: #5C6E6B; --accent: #E8F5F2;
+    --border: #C8DDD9; --shadow: rgba(61,122,110,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 68px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 16px var(--shadow); }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--green-dark); font-weight: 700; text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-light); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--green); }
+  .nav-cta { background: var(--green); color: white; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--green); border-radius: 2px; }
+  .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: white; padding: 1.5rem 5%; border-bottom: 1px solid var(--border); z-index: 99; }
+  .mobile-menu a { display: block; padding: 0.75rem 0; color: var(--text); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--accent); }
+  .mobile-menu.open { display: block; }
+
+  .page-hero { padding: 120px 5% 60px; background: linear-gradient(135deg, #EAF4F2, #F7FAF9); text-align: center; }
+  .section-label { font-size: 0.78rem; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+  .divider { width: 48px; height: 3px; background: var(--green); border-radius: 2px; margin: 1rem auto 2rem; }
+
+  .cs-section { padding: 60px 5%; }
+  .cs-section:nth-child(even) { background: white; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  /* Case Study Card - Full Width */
+  .cs-card { background: white; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 3rem; box-shadow: 0 4px 24px var(--shadow); transition: box-shadow 0.3s; }
+  .cs-card:hover { box-shadow: 0 12px 40px var(--shadow); }
+  .cs-card-header { display: grid; grid-template-columns: 1fr 1fr; min-height: 280px; }
+  .cs-card-visual { display: flex; align-items: center; justify-content: center; padding: 2rem; font-size: 5rem; position: relative; overflow: hidden; }
+  .cs-card-visual::before { content: ''; position: absolute; inset: 0; opacity: 0.1; }
+  .cs-card-meta { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+  .cs-number { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--green-light); font-weight: 700; line-height: 1; margin-bottom: 0.5rem; }
+  .cs-cat { font-size: 0.75rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .cs-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.3; }
+  .cs-subtitle { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; margin-bottom: 1rem; }
+  .cs-meta-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .cs-meta-item { font-size: 0.8rem; color: var(--text-light); }
+  .cs-meta-item strong { color: var(--text); display: block; font-size: 0.85rem; }
+  .cs-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .cs-tag { background: var(--accent); color: var(--green-dark); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 500; }
+  .cs-link { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--green); color: white; padding: 0.6rem 1.4rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: background 0.2s; }
+  .cs-link:hover { background: var(--green-dark); }
+
+  /* Process Steps */
+  .cs-body { padding: 0 2.5rem 2.5rem; border-top: 1px solid var(--border); }
+  .cs-process { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .cs-step { background: var(--off-white); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; }
+  .cs-step-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--green); font-weight: 700; margin-bottom: 0.3rem; }
+  .cs-step-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .cs-step-desc { font-size: 0.78rem; color: var(--text-light); line-height: 1.5; }
+
+  /* Key Insights */
+  .cs-insights { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .insight-card { background: var(--green); color: white; border-radius: 14px; padding: 1.2rem; }
+  .insight-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .insight-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .insight-desc { font-size: 0.78rem; opacity: 0.85; line-height: 1.5; }
+  .insight-card:nth-child(even) { background: var(--green-dark); }
+  .insight-card:nth-child(3n) { background: var(--green-mid); }
+
+  .body-section-title { font-weight: 700; font-size: 1rem; color: var(--text); margin: 2rem 0 0.75rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  footer { background: var(--green-dark); color: rgba(255,255,255,0.7); padding: 2rem 5%; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white; font-weight: 700; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.7); text-decoration: none; }
+  .footer-links a:hover { color: white; }
+
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .cs-card-header { grid-template-columns: 1fr; }
+    .cs-card-visual { height: 180px; }
+    .cs-body { padding: 0 1.5rem 1.5rem; }
+    .cs-card-meta { padding: 1.5rem; }
+    .cs-process { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Aisha Sheikh</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="case-studies.html" class="active">Case Studies</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Hire Me</a>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="projects.html">Projects</a>
+  <a href="case-studies.html">Case Studies</a><a href="index.html#contact">Contact</a>
+</div>
+
+<div class="page-hero">
+  <div class="section-label">Deep Dives</div>
+  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">UX Case Studies</h1>
+  <div class="divider"></div>
+  <p style="color:var(--text-light);max-width:560px;margin:0 auto;line-height:1.7;">Research-driven design explorations — from problem discovery to validated solutions. Each study documents my full UX process.</p>
+</div>
+
+<section class="cs-section">
+  <div class="section-inner">
+
+    <!-- CASE STUDY 1: ToneOp -->
+    <div class="cs-card reveal" id="toneop">
+      <div class="cs-card-header">
+        <div class="cs-card-visual" style="background:linear-gradient(135deg,#3D7A6E15,#5A9E9025);">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem;">💪</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--green);font-weight:700;margin-top:0.5rem;">ToneOp</div>
+            <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;">Fitness App Redesign</div>
+          </div>
+        </div>
+        <div class="cs-card-meta">
+          <div class="cs-number">01</div>
+          <div class="cs-cat">UX Case Study · Fitness App</div>
+          <div class="cs-title">ToneOp — Stats & Burn Screen Redesign</div>
+          <div class="cs-subtitle">Redesigned the core Stats/Burn tracking screen of ToneOp fitness app to improve data clarity, reduce cognitive load, and boost user engagement through better visual hierarchy.</div>
+          <div class="cs-meta-row">
+            <div class="cs-meta-item"><strong>Role</strong>UX Designer (Contract)</div>
+            <div class="cs-meta-item"><strong>Duration</strong>2023</div>
+            <div class="cs-meta-item"><strong>Tools</strong>Figma, HTML/CSS</div>
+          </div>
+          <div class="cs-tags">
+            <span class="cs-tag">UX Research</span><span class="cs-tag">Redesign</span><span class="cs-tag">Fitness</span><span class="cs-tag">Prototyping</span><span class="cs-tag">UX Writing</span>
+          </div>
+                    <a href="https://www.behance.net/gallery/249278161/health-app-ux-case-design-case-study" target="_blank" class="cs-link">View Full Case Study ↗</a>
+
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="body-section-title">🔍 The Problem</div>
+        <p style="font-size:0.88rem;color:var(--text-light);line-height:1.7;">ToneOp's Stats/Burn screen presented complex fitness data in a cluttered layout that made it difficult for users to quickly understand their daily progress. Key metrics were buried, calorie visualization was confusing, and the screen lacked a clear hierarchy — leading to user drop-off from a critical engagement touchpoint.</p>
+
+        <div class="body-section-title">⚙️ Design Process</div>
+        <div class="cs-process">
+          <div class="cs-step"><div class="cs-step-num">01</div><div class="cs-step-title">Heuristic Audit</div><div class="cs-step-desc">Analyzed existing screen against Nielsen's 10 heuristics, documented 15+ usability issues</div></div>
+          <div class="cs-step"><div class="cs-step-num">02</div><div class="cs-step-title">User Research</div><div class="cs-step-desc">Identified key pain points around data overload and unclear progress indicators</div></div>
+          <div class="cs-step"><div class="cs-step-num">03</div><div class="cs-step-title">Wireframing</div><div class="cs-step-desc">Sketched 3 layout alternatives, explored card-based vs list-based data presentation</div></div>
+          <div class="cs-step"><div class="cs-step-num">04</div><div class="cs-step-title">Hi-Fi Design</div><div class="cs-step-desc">Delivered pixel-perfect Figma screens with interactive calendar prototype</div></div>
+          <div class="cs-step"><div class="cs-step-num">05</div><div class="cs-step-title">Documentation</div><div class="cs-step-desc">20-point solutions summary, design rationale document, case study PDF</div></div>
+        </div>
+
+        <div class="body-section-title">💡 Key Design Decisions</div>
+        <div class="cs-insights">
+          <div class="insight-card"><div class="insight-icon">📊</div><div class="insight-title">Data Hierarchy</div><div class="insight-desc">Prioritized primary metric (calories burned) with large display, secondary stats in supporting cards</div></div>
+          <div class="insight-card"><div class="insight-icon">📅</div><div class="insight-title">Interactive Calendar</div><div class="insight-desc">Replaced static date view with swipeable weekly calendar for quick period navigation</div></div>
+          <div class="insight-card"><div class="insight-icon">🎨</div><div class="insight-title">Visual Encoding</div><div class="insight-desc">Used color-coded progress rings and micro-charts to make data scannable at a glance</div></div>
+          <div class="insight-card"><div class="insight-icon">✍️</div><div class="insight-title">UX Copy</div><div class="insight-desc">Rewrote all microcopy to be motivating, clear, and action-oriented</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE STUDY 2: Laundry -->
+    <div class="cs-card reveal" id="mindmeter">
+      <div class="cs-card-header">
+        <div class="cs-card-visual" style="background:linear-gradient(135deg,#E8EAF615,#C5CAE925);">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem;">👕</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#3949AB;font-weight:700;margin-top:0.5rem;">Luminuos laudary</div>
+            <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;">laundry Service App</div>
+          </div>
+        </div>
+        <div class="cs-card-meta">
+          <div class="cs-number">02</div>
+          <div class="cs-cat">UX Case Study · laundry Service App</div>
+          <div class="cs-title">Luminuos laudary — Make laundry,ironing, Dryclining services easy</div>
+          <div class="cs-subtitle">Designing a minimal, non-intimidating stress check-in tool that helps users Book thier Laundry service easly.</div>
+          <div class="cs-meta-row">
+            <div class="cs-meta-item"><strong>Type</strong>UX Case Study</div>
+            <div class="cs-meta-item"><strong>Focus</strong>Service ease UX</div>
+            <div class="cs-meta-item"><strong>Tools</strong>Figma</div>
+          </div>
+          <div class="cs-tags">
+            <span class="cs-tag">UX Design</span><span class="cs-tag">Laundry Service</span><span class="cs-tag">Minimal UI</span><span class="cs-tag">Micro-interactions</span>
+          </div>
+          <a href="https://www.behance.net/gallery/240917343/laundry-service-mobile-app-designed" target="_blank" class="cs-link">View Full Case Study ↗</a>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="body-section-title">🔍 The Problem</div>
+        <p style="font-size:0.88rem;color:var(--text-light);line-height:1.7;">Urban users want convenient laundry services, but apps often fail with confusing booking flows, hidden pricing, and poor pickup/delivery tracking. Unclear service timelines and low trust in garment handling further frustrate customers. Despite high demand for convenience, these issues reduce reliability and user satisfaction, preventing widespread adoption of digital laundry solutions</p>
+        <div class="body-section-title">💡 Key Design Decisions</div>
+        <div class="cs-insights">
+          <div class="insight-card"><div class="insight-icon">🌙</div><div class="insight-title">Night Time</div><div class="insight-desc">Most users book laundry at night or weekends</div></div>
+          <div class="insight-card"><div class="insight-icon">😌</div><div class="insight-title">Calm Aesthetics</div><div class="insight-desc">Soft colors, generous whitespace, and friendly typography to reduce anxiety</div></div>
+          <div class="insight-card"><div class="insight-icon">📈</div><div class="insight-title">Trend Visualization</div><div class="insight-desc">Simple weekly trend view to build pattern recognition without overwhelming data</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE STUDY 2: Passport Seva -->
+    <div class="cs-card reveal" id="passport">
+      <div class="cs-card-header">
+        <div class="cs-card-visual" style="background:linear-gradient(135deg,#FF980015,#FFC10725);">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem;">🛂</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#E65100;font-weight:700;margin-top:0.5rem;">Passport Seva</div>
+            <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;">Government App Redesign</div>
+          </div>
+        </div>
+        <div class="cs-card-meta">
+          <div class="cs-number">03</div>
+          <div class="cs-cat">UX Case Study · Government App</div>
+          <div class="cs-title">Passport Seva App — UX Redesign</div>
+          <div class="cs-subtitle">Redesigning India's Passport Seva portal to reduce form abandonment, simplify the appointment booking flow, and make government services accessible to all literacy levels.</div>
+          <div class="cs-meta-row">
+            <div class="cs-meta-item"><strong>Type</strong>UX Case Study</div>
+            <div class="cs-meta-item"><strong>Focus</strong>Gov. Service UX</div>
+            <div class="cs-meta-item"><strong>Tools</strong>Figma, Research</div>
+          </div>
+          <div class="cs-tags">
+            <span class="cs-tag">UX Research</span><span class="cs-tag">Government UX</span><span class="cs-tag">Accessibility</span><span class="cs-tag">User Testing</span>
+          </div>
+          <a href="https://www.behance.net/gallery/241189203/Case-Study-Passport-Seva-App" target="_blank" class="cs-link">View Full Case Study ↗</a>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="body-section-title">🔍 The Problem</div>
+        <p style="font-size:0.88rem;color:var(--text-light);line-height:1.7;">India's Passport Seva app suffered from complex navigation, jargon-heavy forms, and poor error handling — causing high abandonment rates, especially among first-time applicants. The challenge was to redesign for clarity, trust, and accessibility across diverse user demographics.</p>
+        <div class="body-section-title">⚙️ Design Process</div>
+        <div class="cs-process">
+          <div class="cs-step"><div class="cs-step-num">01</div><div class="cs-step-title">User Research</div><div class="cs-step-desc">Surveyed users, identified top pain points: confusing forms, unclear status tracking</div></div>
+          <div class="cs-step"><div class="cs-step-num">02</div><div class="cs-step-title">Personas</div><div class="cs-step-desc">Created 3 personas: first-time applicant, renewal user, low-literacy rural user</div></div>
+          <div class="cs-step"><div class="cs-step-num">03</div><div class="cs-step-title">Journey Mapping</div><div class="cs-step-desc">Mapped full application journey, identified 8 critical drop-off points</div></div>
+          <div class="cs-step"><div class="cs-step-num">04</div><div class="cs-step-title">Redesign</div><div class="cs-step-desc">Simplified forms into progressive steps, added clear status tracker and help tooltips</div></div>
+        </div>
+        <div class="body-section-title">💡 Key Outcomes</div>
+        <div class="cs-insights">
+          <div class="insight-card"><div class="insight-icon">📝</div><div class="insight-title">Simplified Forms</div><div class="insight-desc">Broke multi-page form into 5 guided steps with contextual help</div></div>
+          <div class="insight-card"><div class="insight-icon">🔔</div><div class="insight-title">Status Tracking</div><div class="insight-desc">Clear visual status tracker replacing opaque text-based updates</div></div>
+          <div class="insight-card"><div class="insight-icon">♿</div><div class="insight-title">Accessibility</div><div class="insight-desc">WCAG 2.1 compliant design with large touch targets and plain language</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE STUDY 3: MindMeter -->
+    <div class="cs-card reveal" id="mindmeter">
+      <div class="cs-card-header">
+        <div class="cs-card-visual" style="background:linear-gradient(135deg,#E8EAF615,#C5CAE925);">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem;">🧠</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#3949AB;font-weight:700;margin-top:0.5rem;">MindMeter</div>
+            <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;">Stress Awareness Tool</div>
+          </div>
+        </div>
+        <div class="cs-card-meta">
+          <div class="cs-number">04</div>
+          <div class="cs-cat">UX Case Study · Mental Health</div>
+          <div class="cs-title">MindMeter — 2-Minute Stress Awareness Tool</div>
+          <div class="cs-subtitle">Designing a minimal, non-intimidating stress check-in tool that helps users build self-awareness through quick daily assessments without clinical overwhelm.</div>
+          <div class="cs-meta-row">
+            <div class="cs-meta-item"><strong>Type</strong>UX Case Study</div>
+            <div class="cs-meta-item"><strong>Focus</strong>Mental Wellness UX</div>
+            <div class="cs-meta-item"><strong>Tools</strong>Figma</div>
+          </div>
+          <div class="cs-tags">
+            <span class="cs-tag">UX Design</span><span class="cs-tag">Mental Health</span><span class="cs-tag">Minimal UI</span><span class="cs-tag">Micro-interactions</span>
+          </div>
+          <a href="https://www.behance.net/gallery/241229091/MindMeter-a-simple-2-minute-stress-awareness-tool" target="_blank" class="cs-link">View Full Case Study ↗</a>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="body-section-title">🔍 The Problem</div>
+        <p style="font-size:0.88rem;color:var(--text-light);line-height:1.7;">Most mental wellness apps feel clinical, demanding, or guilt-inducing. MindMeter was designed to be the opposite — a 2-minute daily check-in that feels approachable, non-judgmental, and genuinely useful for building stress self-awareness without added pressure.</p>
+        <div class="body-section-title">💡 Key Design Decisions</div>
+        <div class="cs-insights">
+          <div class="insight-card"><div class="insight-icon">⏱️</div><div class="insight-title">2-Minute Limit</div><div class="insight-desc">Strict time constraint designed to remove the "I don't have time" barrier</div></div>
+          <div class="insight-card"><div class="insight-icon">😌</div><div class="insight-title">Calm Aesthetics</div><div class="insight-desc">Soft colors, generous whitespace, and friendly typography to reduce anxiety</div></div>
+          <div class="insight-card"><div class="insight-icon">📈</div><div class="insight-title">Trend Visualization</div><div class="insight-desc">Simple weekly trend view to build pattern recognition without overwhelming data</div></div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- CASE STUDY 5: Rapido UX -->
+    <div class="cs-card reveal" id="rapido">
+      <div class="cs-card-header">
+        <div class="cs-card-visual" style="background:linear-gradient(135deg,#FFF9C415,#FFF59D25);">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem;">🛵</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#F57F17;font-weight:700;margin-top:0.5rem;">Rapido</div>
+            <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;">UX Improvement</div>
+          </div>
+        </div>
+        <div class="cs-card-meta">
+          <div class="cs-number">05</div>
+          <div class="cs-cat">UX Improvement · Mobility App</div>
+          <div class="cs-title">Rapido — Better User Experience</div>
+          <div class="cs-subtitle">Identifying and solving core usability pain points in Rapido's bike taxi app — improving booking flow, ride tracking, and driver communication features.</div>
+          <div class="cs-meta-row">
+            <div class="cs-meta-item"><strong>Type</strong>UX Improvement</div>
+            <div class="cs-meta-item"><strong>Focus</strong>Mobility / On-demand</div>
+            <div class="cs-meta-item"><strong>Tools</strong>Figma, UX Research</div>
+          </div>
+          <div class="cs-tags">
+            <span class="cs-tag">UX Research</span><span class="cs-tag">Mobility App</span><span class="cs-tag">Redesign</span><span class="cs-tag">User Testing</span>
+          </div>
+          <a href="https://www.behance.net/gallery/240195405/Rapido-user-experience-better" target="_blank" class="cs-link">View Full Case Study ↗</a>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="body-section-title">💡 Key Insights</div>
+        <div class="cs-insights">
+          <div class="insight-card"><div class="insight-icon">📍</div><div class="insight-title">Location Accuracy</div><div class="insight-desc">Improved pickup location confirmation UX to reduce driver-rider confusion</div></div>
+          <div class="insight-card"><div class="insight-icon">💬</div><div class="insight-title">Communication</div><div class="insight-desc">Added quick chat templates for common driver-rider messages</div></div>
+          <div class="insight-card"><div class="insight-icon">⭐</div><div class="insight-title">Rating System</div><div class="insight-desc">Redesigned rating flow to be faster, less intrusive, and more actionable</div></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CASE STUDY 4: Food Ordering -->
+    <div class="cs-card reveal" id="food">
+      <div class="cs-card-header">
+        <div class="cs-card-visual" style="background:linear-gradient(135deg,#FFEBEE15,#FFCDD225);">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem;">🍔</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#C62828;font-weight:700;margin-top:0.5rem;">Let's Order</div>
+            <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;">Food Ordering App</div>
+          </div>
+        </div>
+        <div class="cs-card-meta">
+          <div class="cs-number">06</div>
+          <div class="cs-cat">UX Case Study · Food Tech</div>
+          <div class="cs-title">Food Ordering App — UI/UX Case Study</div>
+          <div class="cs-subtitle">End-to-end design of a food ordering mobile app with seamless restaurant discovery, cart management, and quick checkout optimized for conversion.</div>
+          <div class="cs-meta-row">
+            <div class="cs-meta-item"><strong>Type</strong>UX Case Study</div>
+            <div class="cs-meta-item"><strong>Focus</strong>Food Tech / E-Commerce</div>
+            <div class="cs-meta-item"><strong>Tools</strong>Figma</div>
+          </div>
+          <div class="cs-tags">
+            <span class="cs-tag">UX Design</span><span class="cs-tag">Food Tech</span><span class="cs-tag">E-Commerce</span><span class="cs-tag">Mobile UI</span>
+          </div>
+          <a href="https://www.behance.net/gallery/224976793/Food-Ordering-App-UIUX-Case-Study" target="_blank" class="cs-link">View Full Case Study ↗</a>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="body-section-title">⚙️ Design Process</div>
+        <div class="cs-process">
+          <div class="cs-step"><div class="cs-step-num">01</div><div class="cs-step-title">Competitor Analysis</div><div class="cs-step-desc">Analyzed Swiggy, Zomato, and Uber Eats for patterns and opportunities</div></div>
+          <div class="cs-step"><div class="cs-step-num">02</div><div class="cs-step-title">User Flows</div><div class="cs-step-desc">Mapped discovery → menu → cart → checkout → tracking flow</div></div>
+          <div class="cs-step"><div class="cs-step-num">03</div><div class="cs-step-title">UI Design</div><div class="cs-step-desc">High-fidelity screens with appetite-stimulating photography and clear CTAs</div></div>
+          <div class="cs-step"><div class="cs-step-num">04</div><div class="cs-step-title">Prototype</div><div class="cs-step-desc">Interactive Figma prototype for full order flow usability testing</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE STUDY 6: Healthcare -->
+    <div class="cs-card reveal" id="healthcare">
+      <div class="cs-card-header">
+        <div class="cs-card-visual" style="background:linear-gradient(135deg,#E8F5E915,#C8E6C925);">
+          <div style="text-align:center;">
+            <div style="font-size:3.5rem;">🏥</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#2E7D32;font-weight:700;margin-top:0.5rem;">HealthCare</div>
+            <div style="font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;">Sector Case Study</div>
+          </div>
+        </div>
+        <div class="cs-card-meta">
+          <div class="cs-number">07</div>
+          <div class="cs-cat">UX Case Study · Healthcare</div>
+          <div class="cs-title">Healthcare Sector — UX Case Study</div>
+          <div class="cs-subtitle">Exploring UX challenges in India's digital healthcare sector — from appointment booking friction to medical record management and telemedicine onboarding.</div>
+          <div class="cs-meta-row">
+            <div class="cs-meta-item"><strong>Type</strong>UX Research</div>
+            <div class="cs-meta-item"><strong>Focus</strong>Health Tech</div>
+            <div class="cs-meta-item"><strong>Tools</strong>Figma, Research</div>
+          </div>
+          <div class="cs-tags">
+            <span class="cs-tag">UX Research</span><span class="cs-tag">Healthcare</span><span class="cs-tag">India Market</span><span class="cs-tag">Accessibility</span>
+          </div>
+          <a href="https://www.behance.net/gallery/224743295/case-study-on-healthcare-sector" target="_blank" class="cs-link">View Full Case Study ↗</a>
+        </div>
+      </div>
+      <div class="cs-body">
+        <div class="body-section-title">💡 Key Insights</div>
+        <div class="cs-insights">
+          <div class="insight-card"><div class="insight-icon">🩺</div><div class="insight-title">Appointment Booking</div><div class="insight-desc">Simplified doctor discovery with specialty filtering and availability calendar</div></div>
+          <div class="insight-card"><div class="insight-icon">📋</div><div class="insight-title">Medical Records</div><div class="insight-desc">Designed secure, easy-to-navigate personal health record upload and storage</div></div>
+          <div class="insight-card"><div class="insight-icon">📱</div><div class="insight-title">Telemedicine</div><div class="insight-desc">Reduced telemedicine onboarding from 7 steps to 3 with smart defaults</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Aisha Sheikh</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="https://linkedin.com/in/aisha-sheikh-b5b784242" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/aishasheikh20" target="_blank">Behance</a>
+    </div>
+    <span style="font-size:0.8rem;">© 2025 Ayesha Sheikh</span>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

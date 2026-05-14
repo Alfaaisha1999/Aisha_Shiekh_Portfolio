@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aisha Sheikh — UI/UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #3D7A6E;
+    --green-dark: #2B5A51;
+    --green-light: #EAF4F2;
+    --green-mid: #5A9E90;
+    --white: #FFFFFF;
+    --off-white: #F7FAF9;
+    --text: #1A2E2B;
+    --text-light: #5C6E6B;
+    --accent: #E8F5F2;
+    --border: #C8DDD9;
+    --card-bg: #FFFFFF;
+    --shadow: rgba(61,122,110,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); overflow-x: hidden; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 68px;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 24px var(--shadow); }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--green-dark); font-weight: 700; text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-light); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--green); transition: width 0.3s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--green); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-cta { background: var(--green); color: white; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--green); border-radius: 2px; transition: all 0.3s; }
+  .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: white; padding: 1.5rem 5%; border-bottom: 1px solid var(--border); z-index: 99; }
+  .mobile-menu a { display: block; padding: 0.75rem 0; color: var(--text); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--accent); }
+  .mobile-menu.open { display: block; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    background: linear-gradient(135deg, #EAF4F2 0%, #F7FAF9 50%, #E0F0EC 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(61,122,110,0.12) 0%, transparent 70%);
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -80px; left: -80px;
+    width: 350px; height: 350px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(61,122,110,0.08) 0%, transparent 70%);
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: white; padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+  /* ● */
+  .hero-tag::before { content: '🟢'; font-size: 0.8rem; animation: pulse 2s infinite; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.15; margin-bottom: 1rem; animation: fadeUp 0.7s ease 0.1s both; }
+  .hero h1 em { color: var(--green); font-style: italic; }
+  .hero-sub { font-size: 1.05rem; color: var(--text-light); line-height: 1.7; margin-bottom: 2rem; animation: fadeUp 0.7s ease 0.2s both; }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; animation: fadeUp 0.7s ease 0.3s both; }
+  .chip { background: white; border: 1px solid var(--border); color: var(--green-dark); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.7s ease 0.4s both; }
+  .btn-primary { background: var(--green); color: white; padding: 0.85rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; box-shadow: 0 4px 16px rgba(61,122,110,0.3); }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(61,122,110,0.4); }
+  .btn-outline { border: 2px solid var(--green); color: var(--green); padding: 0.85rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; }
+  .btn-outline:hover { background: var(--green); color: white; transform: translateY(-2px); }
+  .hero-stats { display: flex; gap: 2rem; margin-top: 2.5rem; animation: fadeUp 0.7s ease 0.5s both; }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--green); }
+  .stat-label { font-size: 0.75rem; color: var(--text-light); font-weight: 500; }
+
+  .hero-visual { position: relative; animation: fadeUp 0.8s ease 0.2s both; }
+  .hero-card {
+    background: white; border-radius: 24px; padding: 2rem;
+    box-shadow: 0 20px 60px var(--shadow);
+    position: relative; overflow: hidden;
+  }
+  .hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--green), var(--green-mid)); }
+  .profile-img-wrap { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--green-light), var(--accent)); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; border: 3px solid var(--green); overflow: hidden; }
+  .profile-initial { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--green); font-weight: 700; }
+  .hero-card h3 { text-align: center; font-size: 1.1rem; margin-bottom: 0.25rem; color: var(--text); }
+  .hero-card p { text-align: center; font-size: 0.85rem; color: var(--green); font-weight: 500; margin-bottom: 1.5rem; }
+  .skills-preview { display: flex; flex-direction: column; gap: 0.75rem; }
+  .skill-bar-wrap { display: flex; align-items: center; gap: 0.75rem; }
+  .skill-bar-label { font-size: 0.8rem; font-weight: 500; color: var(--text); min-width: 80px; }
+  .skill-bar-track { flex: 1; height: 6px; background: var(--accent); border-radius: 3px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--green-mid)); border-radius: 3px; transform: scaleX(0); transform-origin: left; transition: transform 1s ease 0.5s; }
+  .skill-bar-fill.animate { transform: scaleX(1); }
+  .floating-badge {
+    position: absolute; background: white; border-radius: 14px; padding: 0.6rem 1rem;
+    box-shadow: 0 8px 24px var(--shadow); font-size: 0.8rem; font-weight: 600; color: var(--green-dark);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .badge-1 { top: -30px; right: -16px; animation: float 3s ease-in-out infinite; }
+  .badge-2 { bottom: -16px; left: -16px; animation: float 3s ease-in-out infinite 1.5s; }
+  .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 80px 5%; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 0.78rem; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 1rem; }
+  .section-desc { color: var(--text-light); max-width: 540px; line-height: 1.7; margin-bottom: 3rem; }
+  .divider { width: 48px; height: 3px; background: var(--green); border-radius: 2px; margin: 1rem 0 1.5rem; }
+
+  /* ─── ABOUT ─── */
+  .about { background: white; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
+  .about-img { position: relative; }
+  .about-img-box { background: linear-gradient(135deg, var(--green-light), var(--accent)); border-radius: 24px; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .about-img-box::after { content: 'AS'; font-family: 'Playfair Display', serif; font-size: 8rem; color: var(--green); opacity: 0.2; font-weight: 700; }
+  .about-accent { position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; background: var(--green); border-radius: 20px; z-index: -1; }
+  .about-accent2 { position: absolute; top: -20px; left: -20px; width: 80px; height: 80px; background: var(--green-light); border-radius: 14px; border: 2px solid var(--border); z-index: -1; }
+  .about-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+  .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .fact-card { background: var(--off-white); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; }
+  .fact-label { font-size: 0.75rem; color: var(--text-light); font-weight: 500; margin-bottom: 0.25rem; }
+  .fact-value { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+
+  /* ─── SKILLS SECTION ─── */
+  .skills-section { background: var(--off-white); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: white; border: 1px solid var(--border); border-radius: 18px; padding: 1.8rem; transition: transform 0.3s, box-shadow 0.3s; }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px var(--shadow); }
+  .skill-card-icon { width: 48px; height: 48px; background: var(--green-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1rem; }
+  .skill-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag { background: var(--accent); color: var(--green-dark); padding: 0.25rem 0.7rem; border-radius: 50px; font-size: 0.75rem; font-weight: 500; }
+
+  /* ─── EXPERIENCE ─── */
+  .experience { background: white; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(180deg, var(--green), transparent); }
+  .timeline-item { position: relative; padding-bottom: 2.5rem; }
+  .timeline-item::before { content: ''; position: absolute; left: -2.45rem; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--green); border: 2px solid white; box-shadow: 0 0 0 3px var(--green-light); }
+  .timeline-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+  .timeline-role { font-weight: 700; font-size: 1rem; color: var(--text); }
+  .timeline-company { font-size: 0.9rem; color: var(--green); font-weight: 600; margin-bottom: 0.25rem; }
+  .timeline-date { background: var(--accent); color: var(--green-dark); padding: 0.2rem 0.8rem; border-radius: 50px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+  .timeline-type { font-size: 0.78rem; color: var(--text-light); margin-bottom: 0.75rem; }
+  .timeline-bullets { list-style: none; padding: 0; }
+  .timeline-bullets li { font-size: 0.88rem; color: var(--text-light); padding: 0.3rem 0; padding-left: 1.2rem; position: relative; line-height: 1.6; }
+  .timeline-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--green); font-size: 0.75rem; top: 0.35rem; }
+
+  /* ─── PROJECTS PREVIEW ─── */
+  .projects-preview { background: var(--off-white); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+  .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px var(--shadow); }
+  .project-thumb { height: 200px; background: linear-gradient(135deg, var(--green-light), var(--accent)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .project-thumb-icon { font-size: 3rem; opacity: 0.4; }
+  .project-thumb .overlay { position: absolute; inset: 0; background: var(--green); opacity: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s; }
+  .project-card:hover .overlay { opacity: 0.85; }
+  .project-info { padding: 1.5rem; }
+  .project-cat { font-size: 0.75rem; color: var(--green); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+  .project-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; margin-bottom: 1rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-tag { background: var(--accent); color: var(--green-dark); padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.72rem; font-weight: 500; }
+  .view-all-wrap { text-align: center; margin-top: 3rem; }
+
+  /* ─── CONTACT ─── */
+  .contact-section { background: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-info p { color: var(--text-light); line-height: 1.7; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text); font-weight: 500; padding: 1rem; background: var(--off-white); border: 1px solid var(--border); border-radius: 14px; transition: all 0.2s; }
+  .contact-link:hover { background: var(--green-light); border-color: var(--green); color: var(--green); }
+  .contact-link-icon { width: 38px; height: 38px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; flex-shrink: 0; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+  .form-group input, .form-group textarea { padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 0.9rem; color: var(--text); background: var(--off-white); transition: border-color 0.2s; outline: none; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--green); background: white; }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit { background: var(--green); color: white; border: none; padding: 0.9rem 2rem; border-radius: 50px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+  .form-submit:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--green-dark); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem 5%; }
+  footer a { color: rgba(255,255,255,0.9); text-decoration: none; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white; font-weight: 700; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: white; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-visual { display: none; }
+    .hero-chips { justify-content: center; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-img { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 0 4%; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 60px 4%; }
+    .about-facts { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Aisha Sheikh</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="case-studies.html">Case Studies</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Hire Me</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="projects.html">Projects</a>
+  <a href="case-studies.html">Case Studies</a>
+  <a href="index.html#experience">Experience</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">Open to Work — UI/UX Designer</div>
+      <h1>Designing <em>Digital Experiences</em> That Feel Human</h1>
+      <p class="hero-sub">UI/UX Designer & Frontend Developer based in Bhopal, India — crafting accessible, user-centered interfaces for e-commerce, enterprise and mobile platforms.</p>
+      <div class="hero-chips">
+        <span class="chip">Figma</span>
+        <span class="chip">UX Research</span>
+        <span class="chip">Prototyping</span>
+        <span class="chip">HTML/CSS</span>
+        <span class="chip">Design Systems</span>
+      </div>
+      <div class="hero-btns">
+        <a href="projects.html" class="btn-primary">View My Work →</a>
+        <a href="case-studies.html" class="btn-outline">Case Studies</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Years Design Exp</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Projects Done</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Companies Worked</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-badge badge-1"><span class="badge-dot"></span>Currently at Satya Kabir</div>
+      <div class="hero-card">
+        <div class="profile-img-wrap">
+          <span class="profile-initial">AS</span>
+        </div>
+        <h3>Ayesha Sheikh</h3>
+        <p>UI/UX Designer · Bhopal, India</p>
+        <div class="skills-preview">
+          <div class="skill-bar-wrap">
+            <span class="skill-bar-label">UI Design</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:92%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <span class="skill-bar-label">UX Research</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <span class="skill-bar-label">Prototyping</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <span class="skill-bar-label">Frontend</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-badge badge-2"><span class="badge-dot"></span>IBM UX Certified</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <div class="about-accent"></div>
+        <div class="about-accent2"></div>
+        <div class="about-img-box"></div>
+      </div>
+      <div class="about-content reveal">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">I Turn User Problems Into Elegant Solutions</h2>
+        <div class="divider"></div>
+        <p>I'm Ayesha Sheikh — a UI/UX Designer and Graphic Designer with a B.E. in Computer Science from RGPV University. Currently working full-time as a UI/UX Designer at Satya Kabir E-Solutions in Bhopal.</p>
+        <p>I blend user research, intuitive design, and frontend know-how to create digital products that are both beautiful and functional. From e-commerce marketplaces and HR dashboards to fitness apps and NGO websites — I've designed for real users with real needs.</p>
+        <p>Certified in UX Design by IBM SkillsBuild, I approach every project with empathy, strategy, and a commitment to accessible, conversion-focused design.</p>
+        <div class="about-facts">
+          <div class="fact-card">
+            <div class="fact-label">📍 Location</div>
+            <div class="fact-value">Bhopal, Madhya Pradesh</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">🎓 Education</div>
+            <div class="fact-value">B.E. CSE, RGPV University</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">💼 Current Role</div>
+            <div class="fact-value">UI/UX Designer @ Satya Kabir</div>
+          </div>
+          <div class="fact-card">
+            <div class="fact-label">🏆 Certification</div>
+            <div class="fact-value">IBM UX Design, Accenture Forage</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-inner">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Skills & Expertise</h2>
+    <div class="divider"></div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🎨</div>
+        <h4>UI/UX Design</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Figma</span><span class="skill-tag">Adobe XD</span><span class="skill-tag">Wireframing</span><span class="skill-tag">Prototyping</span><span class="skill-tag">Design Systems</span><span class="skill-tag">Sitemaps</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🔍</div>
+        <h4>UX Research</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">User Interviews</span><span class="skill-tag">Usability Testing</span><span class="skill-tag">Personas</span><span class="skill-tag">Journey Maps</span><span class="skill-tag">Empathy Maps</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">💻</div>
+        <h4>Frontend Development</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Bootstrap</span><span class="skill-tag">Responsive Design</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🖼️</div>
+        <h4>Graphic Design</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Photoshop</span><span class="skill-tag">CorelDRAW</span><span class="skill-tag">Canva</span><span class="skill-tag">Logo Design</span><span class="skill-tag">Packaging</span><span class="skill-tag">Motion</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">📱</div>
+        <h4>Mobile & Web Design</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">App UI</span><span class="skill-tag">E-Commerce</span><span class="skill-tag">Dashboard</span><span class="skill-tag">Landing Pages</span><span class="skill-tag">Accessibility</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🤝</div>
+        <h4>Process & Delivery</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Dev Handoff</span><span class="skill-tag">Figma Specs</span><span class="skill-tag">Rationale Writing</span><span class="skill-tag">Stakeholder Mgmt</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-inner">
+    <div class="section-label">Career Journey</div>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="divider"></div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-role">UI/UX Designer</div>
+            <div class="timeline-company">Satya Kabir E-Solutions Pvt. Ltd.</div>
+            <div class="timeline-type">Full-time · On-site · Bhopal</div>
+          </div>
+          <span class="timeline-date">Jan 2026 – Present</span>
+        </div>
+        <ul class="timeline-bullets">
+          <li>Delivering end-to-end UI/UX designs for e-commerce platforms and enterprise dashboards</li>
+          <li>Creating interactive prototypes and wireframes with consistent design systems in Figma</li>
+          <li>Streamlining developer handoff with detailed Figma specs, reducing revision cycles</li>
+          <li>Conducting user research and usability testing to improve task completion and satisfaction</li>
+        </ul>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-role">Graphic & UI/UX Designer</div>
+            <div class="timeline-company">IndyTech – Web & Software Development Co.</div>
+            <div class="timeline-type">Part-time · Remote</div>
+          </div>
+          <span class="timeline-date">Jan 2025 – Jan 2026</span>
+        </div>
+        <ul class="timeline-bullets">
+          <li>Designed UI, interactive graphics, advertising assets, and marketing collaterals</li>
+          <li>Created motion graphics, sizzle reels, packaging designs, and brand illustrations</li>
+          <li>Handled publication and typographic design for diverse client campaigns</li>
+        </ul>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-role">UI/UX Design Intern</div>
+            <div class="timeline-company">NovaNectar Services Pvt. Ltd.</div>
+            <div class="timeline-type">Internship · Remote · Maharashtra</div>
+          </div>
+          <span class="timeline-date">Aug – Sep 2024</span>
+        </div>
+        <ul class="timeline-bullets">
+          <li>Designed storyboards, sitemaps, and user flows to communicate UX concepts</li>
+          <li>Created UI elements (menus, tab widgets, interactions) using Figma</li>
+          <li>Conducted usability tests, identified pain points, and iterated designs</li>
+        </ul>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-role">Product Design Job Simulation</div>
+            <div class="timeline-company">Accenture North America (via Forage)</div>
+            <div class="timeline-type">Self-paced · Remote</div>
+          </div>
+          <span class="timeline-date">Nov – Dec 2024</span>
+        </div>
+        <ul class="timeline-bullets">
+          <li>Completed UX research, process redesign, and design rationale writing exercises</li>
+          <li>Developed skills in stakeholder management, data interpretation, and user experience</li>
+        </ul>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-role">Web Development Intern</div>
+            <div class="timeline-company">Capable Hub Pvt. Ltd.</div>
+            <div class="timeline-type">Internship · On-site · Bhopal</div>
+          </div>
+          <span class="timeline-date">Aug 2022 – Feb 2023</span>
+        </div>
+        <ul class="timeline-bullets">
+          <li>Built responsive web interfaces using HTML5, CSS3, JavaScript, and Bootstrap</li>
+          <li>Collaborated with design teams to translate mockups into pixel-accurate components</li>
+          <li>Contributed to e-commerce frontend builds and cross-browser testing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS PREVIEW -->
+<section class="projects-preview" id="projects">
+  <div class="section-inner">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-desc">A selection of UI/UX design, frontend, and graphic design work across diverse industries and platforms.</p>
+    <div class="projects-grid">
+      <a href="projects.html#buildmart" class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#FF6D0020,#F9731620);">
+          <div class="project-thumb-icon">🏗️</div>
+          <div class="overlay">View Project →</div>
+        </div>
+        <div class="project-info">
+          <div class="project-cat">E-Commerce · Mobile App</div>
+          <div class="project-title">BuildMart — Construction Materials Marketplace</div>
+          <div class="project-desc">Vendor-facing app UI for a construction e-commerce platform, designed for low-literacy users with simplified flows.</div>
+          <div class="project-tags"><span class="project-tag">Figma</span><span class="project-tag">UX Research</span><span class="project-tag">Mobile UI</span></div>
+        </div>
+      </a>
+      <a href="case-studies.html#toneop" class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#3D7A6E20,#5A9E9020);">
+          <div class="project-thumb-icon">💪</div>
+          <div class="overlay">View Case Study →</div>
+        </div>
+        <div class="project-info">
+          <div class="project-cat">UX Case Study · Fitness App</div>
+          <div class="project-title">ToneOp — Stats & Burn Screen Redesign</div>
+          <div class="project-desc">Full UX redesign improving data clarity and user engagement on a fitness tracking app's key screens.</div>
+          <div class="project-tags"><span class="project-tag">UX Research</span><span class="project-tag">Redesign</span><span class="project-tag">Prototyping</span></div>
+        </div>
+      </a>
+      <a href="projects.html#hrm" class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#2B5A5120,#3D7A6E20);">
+          <div class="project-thumb-icon">📊</div>
+          <div class="overlay">View Project →</div>
+        </div>
+        <div class="project-info">
+          <div class="project-cat">Dashboard · Enterprise</div>
+          <div class="project-title">HRM Employee Management Dashboard</div>
+          <div class="project-desc">Comprehensive HR dashboard for managing employees, attendance, and performance with intuitive data visualization.</div>
+          <div class="project-tags"><span class="project-tag">Dashboard</span><span class="project-tag">Figma</span><span class="project-tag">UI Design</span></div>
+        </div>
+      </a>
+      <a href="projects.html#hotel" class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#EAF4F2,#C8DDD9);">
+          <div class="project-thumb-icon">🏨</div>
+          <div class="overlay">View Project →</div>
+        </div>
+        <div class="project-info">
+          <div class="project-cat">Web Design · Hospitality</div>
+          <div class="project-title">Hotel Tej — Website Design</div>
+          <div class="project-desc">Responsive hotel website with booking flows, room showcases, and brand-consistent visual identity.</div>
+          <div class="project-tags"><span class="project-tag">HTML/CSS</span><span class="project-tag">Figma</span><span class="project-tag">Web Design</span></div>
+        </div>
+      </a>
+      <a href="case-studies.html#passport" class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#FF980020,#FFC10720);">
+          <div class="project-thumb-icon">🛂</div>
+          <div class="overlay">View Case Study →</div>
+        </div>
+        <div class="project-info">
+          <div class="project-cat">UX Case Study · Government App</div>
+          <div class="project-title">Passport Seva App — UX Case Study</div>
+          <div class="project-desc">Redesigning the Passport Seva portal to improve usability, reduce drop-offs, and streamline government service delivery.</div>
+          <div class="project-tags"><span class="project-tag">UX Research</span><span class="project-tag">Case Study</span><span class="project-tag">Govt. App</span></div>
+        </div>
+      </a>
+      <a href="projects.html#msstkg" class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#9C27B020,#E91E6320);">
+          <div class="project-thumb-icon">🌸</div>
+          <div class="overlay">View Project →</div>
+        </div>
+        <div class="project-info">
+          <div class="project-cat">Web Design · NGO</div>
+          <div class="project-title">MSSTKG — Women Empowerment NGO Website</div>
+          <div class="project-desc">Official website for Matrashakti Sangathan Tikamgarh NGO, designed for trust, accessibility, and community outreach.</div>
+          <div class="project-tags"><span class="project-tag">HTML/CSS</span><span class="project-tag">NGO</span><span class="project-tag">Accessibility</span></div>
+        </div>
+      </a>
+    </div>
+    <div class="view-all-wrap">
+      <a href="projects.html" class="btn-primary">View All Projects →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Work Together</h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p>I'm currently open to new UI/UX design opportunities — full-time roles, freelance projects, and design collaborations. Let's create something meaningful together.</p>
+        <div class="contact-links">
+          <a href="mailto:ayeshasheikh@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            <div><div style="font-size:0.75rem;color:var(--text-light)">Email</div>ayeshasheikh@gmail.com</div>
+          </a>
+          <a href="https://linkedin.com/in/aisha-sheikh-b5b784242" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🔗</div>
+            <div><div style="font-size:0.75rem;color:var(--text-light)">LinkedIn</div>aisha-sheikh-b5b784242</div>
+          </a>
+          <a href="https://www.behance.net/aishasheikh20" target="_blank" class="contact-link">
+            <div class="contact-link-icon">🎨</div>
+            <div><div style="font-size:0.75rem;color:var(--text-light)">Behance</div>behance.net/aishasheikh20</div>
+          </a>
+          <a href="https://aishashiekh19991d55.myportfolio.com/work" target="_blank" class="contact-link">
+            <div class="contact-link-icon">💼</div>
+            <div><div style="font-size:0.75rem;color:var(--text-light)">Portfolio</div>Adobe Portfolio</div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="hello@company.com">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Design Opportunity / Project Collaboration">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me about your project or opportunity..."></textarea>
+        </div>
+        <button class="form-submit" onclick="alert('Thank you! Message sent.')">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">Ayesha Sheikh</span>
+    <div class="footer-links">
+      <a href="projects.html">Projects</a>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="https://linkedin.com/in/aisha-sheikh-b5b784242" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/aishasheikh20" target="_blank">Behance</a>
+    </div>
+    <span style="font-size:0.8rem;">© 2026 Ayesha Sheikh · UI/UX Designer</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Skill bars
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-bar-fill').forEach(b => b.classList.add('animate'));
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .hero-card').forEach(el => observer.observe(el));
+
+  // Reveal on scroll
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+</body>
+</html>
